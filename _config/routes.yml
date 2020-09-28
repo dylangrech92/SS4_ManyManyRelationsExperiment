@@ -1,0 +1,51 @@
+---
+Name: lifeboat_routes
+After:
+- '#rootroutes'
+- '#coreroutes'
+- '#adminroutes'
+---
+SilverStripe\Control\Director:
+  extensions:
+    - 'Lifeboat\Extensions\PageURLMapper'
+  reserved_routes:
+    - 'post-deploy-cleanup'
+    - 'customer'
+    - 'wishlist'
+    - 'api'
+    - 'cart'
+    - 'checkout'
+    - 'sitemap.xml'
+    - 'robots.txt'
+    - 'auth'
+    - 'payment'
+    - 'subscribe'
+    - 'public'
+    - 'dist'
+    - 'js'
+    - 'collections'
+    - 'search'
+  rules:
+    '':
+      Controller: 'Lifeboat\Pages\Controllers\Page'
+      ID: 'home'
+    'post-deploy-cleanup': 'Lifeboat\Controllers\CLI\PostDeployCleanup'
+    'customer//$Action/$OtherAction/$OtherID': 'Lifeboat\Controllers\Customers'
+    'wishlist//$Action/$ID': 'Lifeboat\Controllers\WishList'
+    'js/api//$Action/$ID/$OtherID': 'Lifeboat\Controllers\JavascriptAPI'
+    'api/auth//$Action': 'Lifeboat\API\Controllers\Auth'
+    'api//$Model!/$ID/$Relation/$OtherID': 'Lifeboat\API\Controllers\APIController'
+    'cart//$Action/$ID': 'Lifeboat\Controllers\Cart'
+    'checkout//$ID/$Action': 'Lifeboat\Controllers\Checkout'
+    'sitemap.xml': 'Lifeboat\Controllers\SiteMap'
+    'robots.txt': 'Lifeboat\Controllers\Robots'
+    'auth//$Action': 'Lifeboat\Controllers\ThirdPartyAuth'
+    'payment/stripe//$Action/$OrderID': 'Lifeboat\Controllers\Payments\Stripe'
+    'payment/paypal//$Action/$OrderID': 'Lifeboat\Controllers\Payments\PayPal'
+    'payment/cash//$Action/$OrderID': 'Lifeboat\Controllers\Payments\CashOnDelivery'
+    'subscribe//$Action/$ID': 'Lifeboat\Controllers\Subscribe'
+    'collections': 'Lifeboat\Controllers\Collections'
+    'search': 'Lifeboat\Controllers\Search'
+    'objects_controller_ab': 'ObjectsControllerAB'
+    'objects_controller_ac': 'ObjectsControllerAC'
+
