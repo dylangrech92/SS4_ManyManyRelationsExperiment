@@ -28,6 +28,7 @@ namespace {
                 'Sort' => DBInt::class,
             ],
             'ObjectCs' => [
+                // This collides with ObjectC.Sort when building the many many relationship
                 'Sort' => DBInt::class,
             ]
         ];
